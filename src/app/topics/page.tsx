@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 export default function TopicsIndexPage() {
   return (
     <div className="min-h-screen flex flex-col bg-[var(--color-bg-primary)]">
-      <main id="main-content" className="flex-1 w-full pt-[248px]">
+      <main id="main-content" className="flex-1 w-full">
         {/* Hero Section */}
         <section className="max-w-4xl mx-auto px-4 pt-2 pb-12">
           <h1

@@ -51,7 +51,7 @@ export default function BooksPage() {
       className="min-h-screen flex flex-col"
       style={{ background: "var(--color-bg-primary)" }}
     >
-      <main id="main-content" className="flex-1 w-full pt-[248px]">
+      <main id="main-content" className="flex-1 w-full">
         {/* Editorial hero (BKS-01) */}
         <section
           className="max-w-7xl mx-auto px-6 pt-4 pb-16"

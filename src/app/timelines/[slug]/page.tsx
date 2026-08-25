@@ -88,16 +88,16 @@ export default async function TimelinePage({ params }: TimelinePageProps) {
   return (
     <div className="min-h-screen bg-[#050508] text-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(timeline)) }} />
-      <main id="main-content" className="w-full pt-[248px]">
+      <main id="main-content" className="w-full">
         <section className="grain-overlay px-6 pb-14 pt-10">
           <div className="mx-auto max-w-5xl">
             <Link href="/timelines" className="micro-label inline-flex min-h-11 items-center text-cyan-300 hover:text-cyan-100">← Bible timelines</Link>
             <p className="micro-label mt-7 text-cyan-300">{timeline.kicker}</p>
-            <h1 className="mt-4 max-w-4xl text-5xl font-semibold leading-[1.02] text-balance sm:text-6xl lg:text-7xl" style={{ fontFamily: "var(--font-display)" }}>
+            <h1 className="mt-4 max-w-4xl text-[2.5rem] font-semibold leading-[1.04] text-balance sm:text-5xl lg:text-[3.5rem]" style={{ fontFamily: "var(--font-display)" }}>
               {timeline.title}
             </h1>
-            <p className="mt-6 max-w-3xl text-xl leading-relaxed text-white/65">{timeline.tagline}</p>
-            <p className="mt-6 text-sm text-white/45">
+            <p className="mt-6 max-w-[40rem] text-xl leading-relaxed text-white/80">{timeline.tagline}</p>
+            <p className="mt-6 text-sm text-white/65">
               Research and commentary by <Link href="/about" className="text-white/75 underline decoration-cyan-300/45 underline-offset-4 hover:text-cyan-200">Pat Robinson</Link>
               <span aria-hidden="true"> · </span>Updated 25 August 2026
             </p>
@@ -110,7 +110,7 @@ export default async function TimelinePage({ params }: TimelinePageProps) {
 
         <section className="mx-auto grid max-w-5xl gap-10 px-6 py-10 lg:grid-cols-[minmax(0,1fr)_280px]">
           <div className="space-y-5">
-            {timeline.intro.map((paragraph) => <p key={paragraph} className="text-lg leading-8 text-white/72">{paragraph}</p>)}
+            {timeline.intro.map((paragraph) => <p key={paragraph} className="text-lg leading-8 text-white/85">{paragraph}</p>)}
           </div>
           <aside className="rounded-2xl border border-cyan-300/20 bg-cyan-300/[0.05] p-6">
             <p className="micro-label text-cyan-300">BIBLE LENS CONCLUSION</p>
@@ -120,7 +120,7 @@ export default async function TimelinePage({ params }: TimelinePageProps) {
 
         <div className="mx-auto max-w-5xl px-6">
           {timeline.sections.map((section, index) => (
-            <section key={section.id} id={section.id} className="scroll-mt-[248px] border-t border-white/10 py-12">
+            <section key={section.id} id={section.id} className="scroll-mt-[calc(var(--site-nav-offset)+16px)] border-t border-white/10 py-12">
               <div className="grid gap-6 md:grid-cols-[60px_minmax(0,1fr)]">
                 <span className="text-4xl font-semibold text-white/12" style={{ fontFamily: "var(--font-display)" }}>{String(index + 1).padStart(2, "0")}</span>
                 <div>
@@ -129,7 +129,7 @@ export default async function TimelinePage({ params }: TimelinePageProps) {
                     {section.status && <ClaimStatusBadge status={section.status} />}
                   </div>
                   <div className="mt-5 max-w-3xl space-y-4">
-                    {section.body.map((paragraph) => <p key={paragraph} className="text-lg leading-8 text-white/68">{paragraph}</p>)}
+                    {section.body.map((paragraph) => <p key={paragraph} className="text-lg leading-8 text-white/82">{paragraph}</p>)}
                     {section.cite && <p className="pt-2 text-xs font-semibold uppercase tracking-[0.16em] text-cyan-300">{section.cite}</p>}
                   </div>
                 </div>
@@ -143,15 +143,15 @@ export default async function TimelinePage({ params }: TimelinePageProps) {
             <div className="max-w-3xl">
               <p className="micro-label text-cyan-300">SOURCE CHECK</p>
               <h2 id="evidence-ledger-heading" className="mt-3 text-4xl font-semibold" style={{ fontFamily: "var(--font-display)" }}>Evidence ledger</h2>
-              <p className="mt-4 text-lg leading-relaxed text-white/55">This is the line between what the sources say and what the reconstruction proposes.</p>
+              <p className="mt-4 text-lg leading-relaxed text-white/75">This is the line between what the sources say and what the reconstruction proposes.</p>
             </div>
             <div className="mt-10 grid gap-5 sm:grid-cols-2">
               {timeline.evidence.map((item) => (
                 <article key={item.title} className="rounded-2xl border border-white/10 bg-white/[0.025] p-6">
                   <ClaimStatusBadge status={item.status} />
                   <h3 className="mt-4 text-xl font-semibold" style={{ fontFamily: "var(--font-display)" }}>{item.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-white/60">{item.summary}</p>
-                  <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/35">
+                  <p className="mt-3 text-sm leading-7 text-white/72">{item.summary}</p>
+                  <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-white/65">
                     Sources {item.sourceIds.map((id) => `[${timeline.sources.findIndex((source) => source.id === id) + 1}]`).join(" ")}
                   </p>
                 </article>
@@ -159,7 +159,7 @@ export default async function TimelinePage({ params }: TimelinePageProps) {
             </div>
             <aside className="mt-8 rounded-2xl border border-orange-300/20 bg-orange-300/[0.045] p-7">
               <div className="flex flex-wrap items-center gap-3"><ClaimStatusBadge status="disputed" /><h3 className="text-lg font-semibold">The strongest objection</h3></div>
-              <p className="mt-4 max-w-4xl leading-7 text-white/65">{timeline.strongestObjection}</p>
+              <p className="mt-4 max-w-[40rem] leading-7 text-white/75">{timeline.strongestObjection}</p>
             </aside>
           </div>
         </section>
@@ -172,7 +172,7 @@ export default async function TimelinePage({ params }: TimelinePageProps) {
                 <span className="text-sm font-semibold text-cyan-300">[{index + 1}]</span>
                 <div>
                   <p className="font-semibold text-white">{source.url ? <a href={source.url} target="_blank" rel="noreferrer" className="underline decoration-white/20 underline-offset-4 hover:text-cyan-200">{source.title}</a> : source.title}{source.author ? ` — ${source.author}` : ""}</p>
-                  <p className="mt-1 text-sm leading-6 text-white/50">{source.note}</p>
+                  <p className="mt-1 max-w-[40rem] text-sm leading-6 text-white/68">{source.note}</p>
                 </div>
               </li>
             ))}
@@ -186,7 +186,7 @@ export default async function TimelinePage({ params }: TimelinePageProps) {
           <div className="self-center">
             <p className="micro-label text-amber-300">TAKE IT WITH YOU</p>
             <h2 className="mt-3 text-3xl font-semibold" style={{ fontFamily: "var(--font-display)" }}>The shareable evidence card</h2>
-            <p className="mt-4 max-w-xl leading-7 text-white/60">A portrait summary for saving or sharing. The live page remains the source of record, where qualifications and references stay attached.</p>
+            <p className="mt-4 max-w-xl leading-7 text-white/72">A portrait summary for saving or sharing. The live page remains the source of record, where qualifications and references stay attached.</p>
             <a href={timeline.posterImage} download={timeline.posterDownload} className="mt-7 inline-flex min-h-12 items-center bg-cyan-300 px-6 font-semibold text-[#050508] transition-colors hover:bg-cyan-200">Download PNG</a>
           </div>
         </section>

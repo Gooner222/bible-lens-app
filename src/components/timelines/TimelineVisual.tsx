@@ -5,7 +5,7 @@ export function TimelineVisual({ visual }: { visual: TimelineVisualData }) {
 
   return (
     <figure className="overflow-hidden rounded-3xl border border-white/10 bg-[#0b0b12] shadow-[0_32px_100px_rgba(0,0,0,0.35)]">
-      <figcaption className="border-b border-white/10 px-6 py-4 text-center text-[11px] font-semibold uppercase tracking-[0.24em] text-cyan-300">
+      <figcaption className="border-b border-white/10 px-6 py-4 text-center text-xs font-semibold uppercase tracking-[0.24em] text-cyan-300">
         {visual.eyebrow}
       </figcaption>
       <div className="relative grid gap-px bg-white/10 md:grid-cols-2">
@@ -16,7 +16,7 @@ export function TimelineVisual({ visual }: { visual: TimelineVisualData }) {
               lane.emphasis ? "before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-cyan-300" : ""
             }`}
           >
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/55">{lane.label}</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">{lane.label}</p>
             <p
               className={`mt-7 text-4xl font-semibold sm:text-5xl ${lane.emphasis ? "text-cyan-200" : "text-white"}`}
               style={{ fontFamily: "var(--font-display)" }}
@@ -33,7 +33,7 @@ export function TimelineVisual({ visual }: { visual: TimelineVisualData }) {
       </div>
       <div className="grid gap-4 border-t border-white/10 bg-cyan-300/[0.05] px-6 py-6 sm:grid-cols-[1fr_2fr] sm:px-10">
         <p className="text-sm font-semibold text-cyan-200">{visual.pivot}</p>
-        <p className="text-sm leading-relaxed text-white/65">{visual.note}</p>
+        <p className="text-sm leading-relaxed text-white/75">{visual.note}</p>
       </div>
     </figure>
   );

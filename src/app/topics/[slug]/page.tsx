@@ -146,25 +146,25 @@ export default async function TopicPage({ params }: TopicPageProps) {
         />
       )}
 
-      <main id="main-content" className="flex-1 w-full pt-[248px]">
+      <main id="main-content" className="flex-1 w-full">
         {/* Hero Section */}
         <section className="max-w-4xl mx-auto px-4 py-12">
           <h1
             className="text-3xl sm:text-4xl lg:text-5xl font-semibold"
-            style={{ fontFamily: "var(--font-cinzel), serif" }}
+            style={{ fontFamily: "var(--font-display)" }}
           >
             {gold && (
               <span className="text-[var(--color-gold-400)]">{gold}</span>
             )}
             <span className="text-[var(--color-text-primary)]">{primary}</span>
           </h1>
-          <p className="text-lg sm:text-xl text-[var(--color-text-secondary)] leading-relaxed mt-4">
+          <p className="max-w-[40rem] text-lg sm:text-xl text-[var(--color-text-secondary)] leading-relaxed mt-4">
             {topic.description}
           </p>
         </section>
 
         {/* Editorial Prose Section */}
-        <section className="max-w-4xl mx-auto px-4 pb-12">
+        <section className="max-w-[40rem] mx-auto px-4 pb-12">
           {proseParagraphs.map((paragraph, i) => (
             <p
               key={i}
@@ -177,7 +177,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
 
         {/* Watch the Episode — mirrors VideoObject schema */}
         {topic.video && (
-          <section className="max-w-4xl mx-auto px-4 pb-12">
+          <section className="max-w-[40rem] mx-auto px-4 pb-12">
             <a
               href={`https://www.youtube.com/watch?v=${topic.video.youtubeId}`}
               target="_blank"
@@ -201,7 +201,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
                 </p>
                 <p
                   className="text-lg font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-cyan-300)] transition-colors"
-                  style={{ fontFamily: "var(--font-cinzel), serif" }}
+                  style={{ fontFamily: "var(--font-display)" }}
                 >
                   {topic.video.name}
                 </p>
@@ -212,11 +212,11 @@ export default async function TopicPage({ params }: TopicPageProps) {
 
         {/* Doctrinal boundary — the "not this" line, visible and in voice */}
         {topic.boundary && (
-          <section className="max-w-4xl mx-auto px-4 pb-12">
+          <section className="max-w-[40rem] mx-auto px-4 pb-12">
             <div className="card p-6 border-l-2 border-l-[var(--color-gold-500)]">
               <h2
-                className="text-sm uppercase tracking-wide text-[var(--color-gold-400)] mb-3"
-                style={{ fontFamily: "var(--font-cinzel), serif" }}
+                className="text-xl font-semibold text-[var(--color-gold-400)] mb-3"
+                style={{ fontFamily: "var(--font-display)" }}
               >
                 Where this parts from the inherited reading
               </h2>
@@ -236,7 +236,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
         <section className="max-w-4xl mx-auto px-4 pb-16">
           <h2
             className="text-2xl sm:text-3xl font-semibold text-[var(--color-gold-400)] mb-6"
-            style={{ fontFamily: "var(--font-cinzel), serif" }}
+            style={{ fontFamily: "var(--font-display)" }}
           >
             Explore the Chapters
           </h2>
@@ -258,7 +258,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
                 >
                   <p
                     className="text-lg font-semibold text-[var(--color-gold-400)] group-hover:text-[var(--color-gold-300)] mb-1 transition-colors"
-                    style={{ fontFamily: "var(--font-cinzel), serif" }}
+                    style={{ fontFamily: "var(--font-display)" }}
                   >
                     {bookName} {chapter}
                   </p>
@@ -273,10 +273,10 @@ export default async function TopicPage({ params }: TopicPageProps) {
 
         {/* FAQ — mirrors FAQPage schema (visible content required) */}
         {topic.faq?.length ? (
-          <section className="max-w-4xl mx-auto px-4 pb-16">
+          <section className="max-w-[40rem] mx-auto px-4 pb-16">
             <h2
               className="text-2xl sm:text-3xl font-semibold text-[var(--color-gold-400)] mb-6"
-              style={{ fontFamily: "var(--font-cinzel), serif" }}
+              style={{ fontFamily: "var(--font-display)" }}
             >
               Common Questions
             </h2>

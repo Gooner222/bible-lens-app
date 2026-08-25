@@ -30,7 +30,7 @@ export default function CommentaryPage() {
       className="min-h-screen flex flex-col"
       style={{ background: "var(--color-obsidian)" }}
     >
-      <main id="main-content" className="flex-1 w-full pt-[248px]">
+      <main id="main-content" className="flex-1 w-full">
 
         {/* Editorial Hero (CMT-01) */}
         <section

@@ -13,7 +13,7 @@ export default function ChapterError({
 
   return (
     <div className="min-h-screen flex flex-col">
-      <main className="flex-1 max-w-3xl mx-auto w-full px-4 pb-12 pt-[248px]">
+      <main className="flex-1 max-w-3xl mx-auto w-full px-4 pb-12">
         <div className="glass-card p-5">
           <h2
             className="text-xl font-medium mb-2"

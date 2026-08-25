@@ -121,27 +121,34 @@ export function HeroSection() {
           },
         });
 
-        // --- Main track: -700px over full scroll range ---
+        // --- Tracks travel in proportion to the viewport, capped at the
+        // original desktop distance. This keeps the reveal aligned on short
+        // mobile screens instead of applying one fixed pixel value everywhere. ---
+        const trackTravel = () =>
+          -Math.min(700, Math.max(420, window.innerHeight * 0.72));
+
         gsap.to(mainTrackRef.current, {
-          y: -700,
+          y: trackTravel,
           ease: "none",
           scrollTrigger: {
             trigger: container,
             start: "top top",
             end: "bottom bottom",
             scrub: 1,
+            invalidateOnRefresh: true,
           },
         });
 
-        // --- Clarified track: same -700px, same range ---
+        // --- Clarified track: same responsive distance, same range ---
         gsap.to(clarifiedTrackRef.current, {
-          y: -700,
+          y: trackTravel,
           ease: "none",
           scrollTrigger: {
             trigger: container,
             start: "top top",
             end: "bottom bottom",
             scrub: 1,
+            invalidateOnRefresh: true,
           },
         });
 
@@ -202,7 +209,7 @@ export function HeroSection() {
     <div ref={containerRef} className="h-[330vh]">
       {/* Sticky viewport — stays in place while container scrolls (230vh of scroll) */}
       <div
-        className="sticky top-0 h-screen w-full overflow-hidden"
+        className="hero-stage sticky top-0 h-[100svh] w-full overflow-hidden"
         style={{ background: "var(--homepage-bg)" }}
       >
         {/* Parallax Particles */}
@@ -213,13 +220,13 @@ export function HeroSection() {
 
         {/* Main Scroll Track — Blurred Ancient Text */}
         <div ref={mainTrackRef} className="relative z-10 w-full">
-          {/* Opening spacer — clears the ~230px fixed nav so the first text
-              panel isn't hidden beneath it */}
-          <div style={{ height: "25vh" }} />
+          {/* Reserved opening stage: clears the fixed nav and the full rotated
+              diamond before the first manuscript line enters. */}
+          <div className="hero-track-opening" />
 
           {/* Ancient manuscripts scroll through */}
-          <section className="h-[120vh] flex flex-col items-center justify-center px-10">
-            <div className="max-w-2xl space-y-32 ancient-text text-2xl text-center">
+          <section className="min-h-[120svh] flex flex-col items-center justify-start px-6 sm:px-10">
+            <div className="max-w-2xl space-y-24 sm:space-y-32 ancient-text text-xl sm:text-2xl text-center">
               <p style={{ fontFamily: "var(--font-noto-samaritan), serif" }}>
                 𐤁𐤓𐤀𐤔𐤉𐤕 𐤁𐤓𐤀 𐤀𐤋𐤄𐤉𐤌 𐤀𐤕 𐤄𐤔𐤌𐤉𐤌 𐤅𐤀𐤕 𐤄𐤀𐤓𐤒
               </p>
@@ -252,7 +259,7 @@ export function HeroSection() {
         {/* THE LENS — Diamond Mask at Center */}
         <div
           ref={lensContainerRef}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 w-[320px] h-[320px] pointer-events-none"
+          className="hero-lens-position absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-none"
         >
           {/* Diamond border frame */}
           <div
@@ -316,7 +323,7 @@ export function HeroSection() {
         {/* Hero Title — Fades on scroll */}
         <div
           ref={heroTitleWrapperRef}
-          className="absolute inset-0 z-50 flex items-center justify-center pointer-events-none"
+          className="hero-copy-position absolute inset-x-0 -translate-y-1/2 z-50 flex items-center justify-center pointer-events-none"
         >
           <div className="text-center px-4">
             <h1
@@ -357,7 +364,7 @@ export function HeroSection() {
             lens animation completes */}
         <div
           ref={endCtaRef}
-          className="absolute inset-0 z-50 flex flex-col items-center justify-center gap-3 opacity-0 pointer-events-none"
+          className="hero-copy-position absolute inset-x-0 -translate-y-1/2 z-50 flex flex-col items-center justify-center gap-3 opacity-0 pointer-events-none"
         >
           <span
             className="text-[11px] uppercase tracking-[0.3em] text-slate-300"
@@ -377,7 +384,7 @@ export function HeroSection() {
         {/* Scroll Indicator */}
         <div
           ref={scrollHintRef}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-10 opacity-70"
+          className="hero-scroll-position absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-10 opacity-70"
         >
           <span
             className="text-[10px] uppercase tracking-[0.3em] text-[#00E5FF] font-semibold"

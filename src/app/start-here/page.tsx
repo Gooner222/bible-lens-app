@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 export default function StartHerePage() {
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "var(--color-obsidian)" }}>
-      <main id="main-content" className="flex-1 w-full pt-[248px]">
+      <main id="main-content" className="flex-1 w-full">
 
         {/* Editorial Hero (STH-01) */}
         <section

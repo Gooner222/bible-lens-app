@@ -66,7 +66,7 @@ export function MobileTabBar() {
               <span className="material-symbols-outlined" style={{ fontSize: "24px" }}>
                 {item.icon}
               </span>
-              <span className="text-[8px] font-semibold uppercase tracking-[0.08em]">{item.label}</span>
+              <span className="text-[10px] font-semibold uppercase tracking-[0.04em]">{item.label}</span>
             </Link>
           </li>
         ))}

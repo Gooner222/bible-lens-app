@@ -13,7 +13,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Main content */}
-      <main id="main-content" className="flex-1 max-w-3xl mx-auto w-full px-4 pb-12 pt-[248px]">
+      <main id="main-content" className="flex-1 max-w-3xl mx-auto w-full px-4 pb-12">
 
         {/* Section 1: About Bible Lens */}
         <section className="mb-14">

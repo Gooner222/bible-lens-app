@@ -14,7 +14,7 @@ export default function PrivacyPage() {
     <div className="min-h-screen flex flex-col" style={{ background: "var(--color-obsidian)" }}>
       <main
         id="main-content"
-        className="flex-1 max-w-3xl mx-auto w-full px-4 pb-16 pt-[248px]"
+        className="flex-1 max-w-3xl mx-auto w-full px-4 pb-16"
       >
         <h1
           className="text-3xl font-bold mb-3"
