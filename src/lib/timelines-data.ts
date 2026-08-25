@@ -212,7 +212,7 @@ export const TIMELINES: Timeline[] = [
       { id: "exod", title: "Exodus 12:40–41: Masoretic, Septuagint and Samaritan witnesses", note: "The primary textual variants at issue." },
       { id: "genesis", title: "Genesis 12:4; 21:5; 25:26; 47:9", note: "The ages used to derive the patriarchal interval." },
       { id: "josephus", title: "Jewish Antiquities 2.318", author: "Flavius Josephus", note: "An explicit ancient statement of 430 years from Abraham and 215 from Jacob.", url: "https://www.perseus.tufts.edu/hopper/text?doc=J.+AJ+2.318" },
-      { id: "frankel", title: "How Many Years Were the Israelites in Egypt?", author: "David Frankel", note: "A concise scholarly discussion of the variant and the possibility of harmonising expansion.", url: "https://www.thetorah.com/article/how-many-years-were-the-israelites-in-egypt" },
+      { id: "glatt-gilad", title: "How Many Years Were the Israelites in Egypt?", author: "David A. Glatt-Gilad", note: "A concise scholarly discussion of the variant and the possibility of harmonising expansion.", url: "https://www.thetorah.com/article/how-many-years-were-the-israelites-in-egypt" },
     ],
     posterImage: "/timelines/israel-sojourn-evidence.png",
     posterAlt: "Poster comparing the 215-year and 430-year readings of Israel's time in Egypt.",
