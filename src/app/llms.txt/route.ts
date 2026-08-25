@@ -5,10 +5,11 @@
 // Statically generated at build time; no runtime cost.
 
 import { TOPIC_PAGES, COMMENTARY_CHAPTERS } from "@/lib/commentary-index";
+import { TIMELINES } from "@/lib/timelines-data";
 
 export const dynamic = "force-static";
 
-const BASE = "https://biblelens.faith";
+const BASE = "https://www.biblelens.faith";
 
 const BOOK_LABELS: Record<string, string> = {
   genesis: "Genesis",
@@ -47,6 +48,10 @@ function buildLlmsTxt(): string {
     })
     .join("\n");
 
+  const timelines = TIMELINES.map(
+    (timeline) => `- [${timeline.title}](${BASE}/timelines/${timeline.slug}): ${timeline.metaDescription}`,
+  ).join("\n");
+
   return `# Bible Lens
 
 > Historically grounded Bible commentary, read through the lens of the ancient Near Eastern world — what each passage meant to its original audience before later tradition reshaped it. Context over tradition.
@@ -58,6 +63,12 @@ Bible Lens holds a strict scriptural standard: every reading is argued from the 
 In-depth thematic essays. Each argues one contested question from the primary text and its ancient context, and names where its reading parts from the popular one.
 
 ${topics}
+
+## Bible Timelines
+
+Source-led chronological investigations. Each separates documented evidence from derived dates, scholarly disputes and proposed identifications.
+
+${timelines}
 
 ## Scripture Commentary
 

@@ -40,6 +40,7 @@ export function HomepageFooter() {
           <div className="relative z-10 flex flex-wrap justify-center gap-10">
             {[
               { label: "Commentary", href: "/commentary" },
+              { label: "Timelines", href: "/timelines" },
               { label: "About", href: "/about" },
               { label: "Start Here", href: "/start-here" },
               { label: "Privacy", href: "/privacy" },

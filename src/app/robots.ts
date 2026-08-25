@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/"],
       },
     ],
-    sitemap: "https://biblelens.faith/sitemap.xml",
+    sitemap: "https://www.biblelens.faith/sitemap.xml",
   };
 }

@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: StudyArticlePageProps): Promi
   const { slug } = await params
   const article = getArticleBySlug(slug)
   if (!article) return { title: 'Article Not Found' }
-  const url = `https://biblelens.faith/study/${slug}`
+  const url = `https://www.biblelens.faith/study/${slug}`
   return {
     title: `${article.title} — Bible Lens Deep Dive`,
     description: article.description,

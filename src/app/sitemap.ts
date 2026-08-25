@@ -5,7 +5,7 @@ import { TIMELINE_SLUGS } from "@/lib/timelines-data";
 import { getAllArticleSlugs } from "@/lib/articles";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://biblelens.faith";
+  const base = "https://www.biblelens.faith";
   const books = getAllBooks();
 
   const staticEntries: MetadataRoute.Sitemap = [
@@ -17,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/start-here`, changeFrequency: "monthly" as const, priority: 0.8 },
     { url: `${base}/books`, changeFrequency: "monthly" as const, priority: 0.7 },
     { url: `${base}/topics`, changeFrequency: "weekly" as const, priority: 0.8 },
-    { url: `${base}/timelines`, changeFrequency: "monthly" as const, priority: 0.7 },
+    { url: `${base}/timelines`, changeFrequency: "monthly" as const, priority: 0.9 },
     { url: `${base}/privacy`, changeFrequency: "yearly" as const, priority: 0.3 },
     { url: `${base}/bible/psalms/full`, changeFrequency: "monthly" as const, priority: 0.6 },
   ];
@@ -54,7 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const timelineEntries: MetadataRoute.Sitemap = TIMELINE_SLUGS.map((slug) => ({
     url: `${base}/timelines/${slug}`,
     changeFrequency: "monthly" as const,
-    priority: 0.7,
+    priority: 0.8,
   }));
 
   return [

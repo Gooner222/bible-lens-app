@@ -8,6 +8,7 @@ const navItems = [
   { label: "Books", href: "/books" },
   { label: "Commentary", href: "/commentary" },
   { label: "Topics", href: "/topics" },
+  { label: "Timelines", href: "/timelines" },
   { label: "Start Here", href: "/start-here" },
   { label: "Ask a Scholar", href: "/chat" },
 ];
@@ -21,6 +22,9 @@ function isActive(href: string, pathname: string): boolean {
   }
   if (href === "/topics") {
     return pathname.startsWith("/topics");
+  }
+  if (href === "/timelines") {
+    return pathname.startsWith("/timelines");
   }
   if (href === "/start-here") {
     return pathname === "/start-here" || pathname.startsWith("/start-here/");
@@ -65,7 +69,7 @@ export function SiteNav() {
 
         {/* Nav links centered beneath the crest */}
         <nav aria-label="Main navigation" className="mt-1">
-          <ul className="hidden md:flex items-center justify-center gap-9">
+          <ul className="hidden md:flex items-center justify-center gap-7 lg:gap-9">
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link

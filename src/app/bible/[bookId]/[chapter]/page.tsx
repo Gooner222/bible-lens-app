@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: ChapterPageProps): Promise<Me
     ? `${bookMeta.name} ${chapterNum} Commentary — Historical Context | Bible Lens`
     : `${bookMeta.name} ${chapterNum} | Bible Lens`;
 
-  const canonicalUrl = `https://biblelens.faith/bible/${bookId}/${chapterNum}`;
+  const canonicalUrl = `https://www.biblelens.faith/bible/${bookId}/${chapterNum}`;
 
   return {
     title,
@@ -121,13 +121,13 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://biblelens.faith/",
+        item: "https://www.biblelens.faith/",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: bookMeta.name,
-        item: `https://biblelens.faith/bible/${bookId}`,
+        item: `https://www.biblelens.faith/bible/${bookId}`,
       },
       {
         "@type": "ListItem",
@@ -417,4 +417,3 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
     </div>
   );
 }
-

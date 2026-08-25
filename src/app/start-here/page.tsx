@@ -10,12 +10,12 @@ export const metadata: Metadata = {
   title: "Start Here | Bible Lens",
   description:
     "New to Bible Lens? Find your entry point — whether you're questioning tradition, curious about ancient context, or tracing biblical threads through history.",
-  alternates: { canonical: "https://biblelens.faith/start-here" },
+  alternates: { canonical: "https://www.biblelens.faith/start-here" },
   openGraph: {
     title: "Start Here | Bible Lens",
     description:
       "New to Bible Lens? Find your entry point — whether you're questioning tradition, curious about ancient context, or tracing biblical threads through history.",
-    url: "https://biblelens.faith/start-here",
+    url: "https://www.biblelens.faith/start-here",
     siteName: "Bible Lens",
     type: "website",
   },

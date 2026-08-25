@@ -6,7 +6,7 @@
 // into OG + Twitter and sets a per-route canonical.
 import type { Metadata } from 'next';
 
-const SITE_URL = 'https://biblelens.faith';
+const SITE_URL = 'https://www.biblelens.faith';
 
 export function pageMetadata({
   title,

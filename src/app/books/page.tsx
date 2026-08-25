@@ -11,11 +11,11 @@ export const metadata: Metadata = {
   title: "Bible Books | Bible Lens",
   description:
     "Browse all 66 books of the Bible grouped by category — Pentateuch, History, Poetry, Prophets, Gospels, Epistles, and more.",
-  alternates: { canonical: "https://biblelens.faith/books" },
+  alternates: { canonical: "https://www.biblelens.faith/books" },
   openGraph: {
     title: "Bible Books | Bible Lens",
     description: "Browse all 66 books of the Bible grouped by category.",
-    url: "https://biblelens.faith/books",
+    url: "https://www.biblelens.faith/books",
     siteName: "Bible Lens",
     type: "website",
   },

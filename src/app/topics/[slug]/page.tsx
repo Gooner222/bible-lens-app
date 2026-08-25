@@ -28,13 +28,13 @@ export async function generateMetadata({ params }: TopicPageProps): Promise<Meta
     description: topic.description,
     keywords: topic.keywords,
     alternates: {
-      canonical: `https://biblelens.faith/topics/${slug}`,
+      canonical: `https://www.biblelens.faith/topics/${slug}`,
     },
     openGraph: {
       type: "article",
       title: `${topic.title} | Bible Lens`,
       description: topic.description,
-      url: `https://biblelens.faith/topics/${slug}`,
+      url: `https://www.biblelens.faith/topics/${slug}`,
       images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Bible Lens" }],
     },
     twitter: {
@@ -83,7 +83,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
     "@type": "Article",
     headline: topic.title,
     description: topic.description,
-    url: `https://biblelens.faith/topics/${slug}`,
+    url: `https://www.biblelens.faith/topics/${slug}`,
     author: { "@type": "Organization", name: "Bible Lens" },
     publisher: { "@type": "Organization", name: "Bible Lens" },
     ...(topic.datePublished ? { datePublished: topic.datePublished } : {}),

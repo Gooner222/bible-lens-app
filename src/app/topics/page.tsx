@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Explore Bible Lens topics — theme-level deep dives into Scripture through the lens of history, archaeology, and the original audience.",
   alternates: {
-    canonical: "https://biblelens.faith/topics",
+    canonical: "https://www.biblelens.faith/topics",
   },
   openGraph: {
     type: "website",
     title: "Topics | Bible Lens",
     description:
       "Explore Bible Lens topics — theme-level deep dives into Scripture through historical context.",
-    url: "https://biblelens.faith/topics",
+    url: "https://www.biblelens.faith/topics",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Bible Lens" }],
   },
   twitter: {

@@ -57,6 +57,33 @@ export default function AboutPage() {
           </div>
         </section>
 
+        <section className="mb-14 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-secondary)] p-7 sm:p-9">
+          <p className="micro-label mb-3" style={{ color: "var(--color-cyan-400)" }}>
+            WHO&rsquo;S BEHIND BIBLE LENS
+          </p>
+          <h2
+            id="pat-robinson"
+            className="text-2xl font-bold mb-5"
+            style={{ fontFamily: "var(--font-cinzel), serif", color: "var(--color-text-primary)" }}
+          >
+            Pat Robinson
+          </h2>
+          <div className="space-y-4 text-lg" style={{ color: "var(--color-text-secondary)" }}>
+            <p>
+              I built Bible Lens for readers who want to examine a difficult claim without being
+              pushed toward a predetermined answer. My role is to make the argument traceable:
+              begin with the primary text, show the historical setting, name the source and keep
+              the strongest objection in view.
+            </p>
+            <p>
+              I&rsquo;m an independent researcher and publisher, not an archaeologist or biblical
+              languages professor. When specialist evidence matters, Bible Lens points to the
+              excavation report, manuscript or scholar rather than borrowing their authority.
+              If the evidence changes, the page should change with it.
+            </p>
+          </div>
+        </section>
+
         {/* Section 2: About the Lens */}
         <section className="mb-14">
           <h2

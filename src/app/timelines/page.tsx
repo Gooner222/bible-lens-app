@@ -1,125 +1,115 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { EmailCapture } from "@/components/EmailCapture";
 import { GlassCard } from "@/components/GlassCard";
-import { TIMELINES } from "@/lib/timelines-data";
+import { ClaimStatusBadge } from "@/components/timelines/ClaimStatusBadge";
+import { MasterTimeline } from "@/components/timelines/MasterTimeline";
+import { TimelineVisual } from "@/components/timelines/TimelineVisual";
+import { CLAIM_STATUS_COPY, TIMELINES, type ClaimStatus } from "@/lib/timelines-data";
 
 export const dynamic = "force-static";
 
+const SITE_URL = "https://www.biblelens.faith";
+
 export const metadata: Metadata = {
-  title: "Bible Chronology Through Ancient Eyes | Bible Lens",
-  description:
-    "Visual timelines of the Old Testament — scholarly chronology, ancient sources, and the conflicts most Bibles skip over. How long was Israel in Egypt? When did the Flood happen? What was buried at Avaris?",
-  alternates: { canonical: "https://biblelens.faith/timelines" },
+  title: "Bible Timelines: Genesis to the Conquest | Bible Lens",
+  description: "Explore a source-led biblical timeline from Genesis to the conquest, with documented evidence separated from calculations, disputes and hypotheses.",
+  alternates: { canonical: `${SITE_URL}/timelines` },
   openGraph: {
-    title: "Bible Chronology Through Ancient Eyes | Bible Lens",
-    description:
-      "Visual timelines of the Old Testament — scholarly chronology, ancient sources, and the conflicts most Bibles skip over.",
-    url: "https://biblelens.faith/timelines",
+    title: "Bible Timelines: Genesis to the Conquest | Bible Lens",
+    description: "A source-led chronology with the evidence—and the uncertainty—kept visible.",
+    url: `${SITE_URL}/timelines`,
     siteName: "Bible Lens",
     type: "website",
-    images: [
-      {
-        url: "/timelines/israel-in-egypt-hero.png",
-        width: 1000,
-        height: 1500,
-        alt: "Israel in Egypt: 215 vs 430 — the dropped phrase from Exodus 12:40",
-      },
-    ],
+    images: [{ url: "/timelines/og/master-timeline.png", width: 1200, height: 630, alt: "Bible Lens chronology from Genesis to the conquest" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bible Chronology Through Ancient Eyes | Bible Lens",
-    description:
-      "Visual timelines of the Old Testament — scholarly chronology, ancient sources, and the conflicts most Bibles skip over.",
-    images: ["/timelines/israel-in-egypt-hero.png"],
+    title: "Bible Timelines: Genesis to the Conquest | Bible Lens",
+    description: "A source-led chronology with the evidence—and the uncertainty—kept visible.",
+    images: ["/timelines/og/master-timeline.png"],
   },
 };
 
+const statuses = Object.keys(CLAIM_STATUS_COPY) as ClaimStatus[];
+
 export default function TimelinesIndexPage() {
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: "var(--color-obsidian)" }}>
-      <main id="main-content" className="flex-1 w-full pt-[248px]">
-        {/* Editorial hero */}
-        <section
-          className="grain-overlay min-h-[36vh] flex items-end pb-14 px-6"
-          style={{ background: "var(--color-obsidian)" }}
-        >
-          <div className="max-w-6xl mx-auto w-full">
-            <GlassCard className="p-10 md:p-16 text-center max-w-4xl mx-auto">
-              <span className="micro-label mb-4 block" style={{ color: "var(--color-cyan-400)" }}>
-                OLD TESTAMENT CHRONOLOGY
-              </span>
-              <h1
-                className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-balance"
-                style={{ fontFamily: "var(--font-display)", color: "var(--color-text-primary)" }}
-              >
-                Bible Chronology Through Ancient Eyes
-              </h1>
-              <p
-                className="mt-3 max-w-2xl mx-auto text-lg text-pretty"
-                style={{ color: "var(--color-text-muted-warm)" }}
-              >
-                Visual timelines of the Old Testament — the chronology questions ancient sources
-                don&apos;t agree on, drawn in a way you can actually share.
-              </p>
-            </GlassCard>
+    <div className="min-h-screen bg-[#050508] text-white">
+      <main id="main-content" className="w-full pt-[248px]">
+        <section className="grain-overlay px-6 pb-16 pt-10">
+          <div className="mx-auto max-w-6xl">
+            <p className="micro-label text-cyan-300">BIBLE LENS · CHRONOLOGY</p>
+            <div className="mt-5 grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_390px]">
+              <div>
+                <h1 className="max-w-4xl text-5xl font-semibold leading-[0.98] text-balance sm:text-6xl lg:text-8xl" style={{ fontFamily: "var(--font-display)" }}>
+                  The Bible,<br /><span className="text-cyan-200">placed in time.</span>
+                </h1>
+              </div>
+              <div className="border-l border-cyan-300/35 pl-6">
+                <p className="text-lg leading-relaxed text-white/70">
+                  A working chronology from Genesis to the conquest—built from biblical figures, ancient manuscripts and archaeology, with the uncertainty left where you can see it.
+                </p>
+                <p className="mt-4 text-sm text-white/45">Dates marked “derived” are reconstructions, not dates printed in the text.</p>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Timeline cards */}
-        <section className="max-w-6xl mx-auto px-6 py-12">
-          <div className="grid gap-8 md:grid-cols-3">
-            {TIMELINES.map((t) => (
-              <Link
-                key={t.slug}
-                href={`/timelines/${t.slug}`}
-                className="group block glass-card overflow-hidden"
-                aria-label={t.title}
-              >
-                <div className="relative aspect-[1000/1500] overflow-hidden">
-                  <Image
-                    src={t.heroImage}
-                    alt={t.heroAlt}
-                    fill
-                    className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/80 via-transparent to-transparent" />
+        <section className="border-y border-white/8 bg-white/[0.018] px-6 py-8" aria-labelledby="evidence-key">
+          <div className="mx-auto max-w-6xl">
+            <h2 id="evidence-key" className="text-xs font-semibold uppercase tracking-[0.2em] text-white/55">How to read the evidence</h2>
+            <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {statuses.map((status) => (
+                <div key={status} className="rounded-xl border border-white/8 bg-black/20 p-4">
+                  <ClaimStatusBadge status={status} />
+                  <p className="mt-3 text-sm leading-relaxed text-white/55">{CLAIM_STATUS_COPY[status].description}</p>
                 </div>
-                <div className="p-6">
-                  <span className="micro-label" style={{ color: "var(--color-cyan-400)" }}>
-                    {t.kicker}
-                  </span>
-                  <h2
-                    className="mt-2 text-xl font-semibold text-balance"
-                    style={{ fontFamily: "var(--font-display)", color: "var(--color-text-primary)" }}
-                  >
-                    {t.title}
-                  </h2>
-                  <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--color-text-muted-warm)" }}>
-                    {t.tagline}
-                  </p>
-                  <span
-                    className="mt-4 inline-block micro-label transition-colors group-hover:brightness-125"
-                    style={{ color: "var(--color-cyan-400)" }}
-                  >
-                    View timeline →
-                  </span>
-                </div>
-              </Link>
-            ))}
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* Email capture */}
-        <section className="max-w-6xl mx-auto px-6 pb-16">
-          <GlassCard className="p-10">
-            <EmailCapture
-              headline="Want the next infographic in your inbox?"
-              subtext="We'll send a note when a new timeline ships — no weekly newsletter, no upsell, just the next pin."
-            />
+        <section className="mx-auto max-w-[1500px] px-6 py-20" aria-labelledby="master-timeline-heading">
+          <div className="mb-12 max-w-3xl">
+            <p className="micro-label text-amber-300">THE MASTER VIEW</p>
+            <h2 id="master-timeline-heading" className="mt-3 text-4xl font-semibold text-balance sm:text-5xl" style={{ fontFamily: "var(--font-display)" }}>
+              Genesis to the conquest
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-white/60">Follow the spine of the story, then open any linked investigation to inspect the argument behind the date.</p>
+          </div>
+          <MasterTimeline />
+        </section>
+
+        <section className="border-t border-white/8 bg-[#08080d] px-6 py-20" aria-labelledby="investigations-heading">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-12 max-w-3xl">
+              <p className="micro-label text-cyan-300">OPEN THE EVIDENCE</p>
+              <h2 id="investigations-heading" className="mt-3 text-4xl font-semibold sm:text-5xl" style={{ fontFamily: "var(--font-display)" }}>
+                Three investigations. No hidden leaps.
+              </h2>
+            </div>
+            <div className="grid gap-8 lg:grid-cols-3">
+              {TIMELINES.map((timeline) => (
+                <article key={timeline.slug} className="group flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.025] transition-all hover:-translate-y-1 hover:border-cyan-300/30">
+                  <TimelineVisual visual={timeline.visual} />
+                  <div className="flex flex-1 flex-col p-7">
+                    <p className="micro-label text-cyan-300">{timeline.kicker}</p>
+                    <h3 className="mt-3 text-2xl font-semibold" style={{ fontFamily: "var(--font-display)" }}>{timeline.title}</h3>
+                    <p className="mt-3 flex-1 text-sm leading-relaxed text-white/60">{timeline.tagline}</p>
+                    <Link href={`/timelines/${timeline.slug}`} className="mt-7 inline-flex min-h-11 items-center font-semibold text-cyan-200 hover:text-cyan-100">
+                      Examine the evidence <span className="ml-2 transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-6xl px-6 py-16">
+          <GlassCard className="p-8 sm:p-12">
+            <EmailCapture headline="Follow the timeline as it grows" subtext="New investigations arrive when the evidence is ready—sources included, uncertainty intact." />
           </GlassCard>
         </section>
       </main>

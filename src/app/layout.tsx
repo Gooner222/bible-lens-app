@@ -46,12 +46,12 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://biblelens.faith"),
+  metadataBase: new URL("https://www.biblelens.faith"),
   title: "Bible Lens | Context Over Tradition",
   description: "Ancient wisdom, modern clarity. Explore Scripture through historical context with the Bible Lens app.",
   keywords: ["Bible", "Scripture", "Biblical study", "historical context", "Bible app"],
-  authors: [{ name: "Bible Lens" }],
-  creator: "Bible Lens",
+  authors: [{ name: "Pat Robinson", url: "https://www.biblelens.faith/about" }],
+  creator: "Pat Robinson",
   publisher: "Bible Lens",
   manifest: "/manifest.json",
   icons: {
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_GB",
-    url: "https://biblelens.faith",
+    url: "https://www.biblelens.faith",
     siteName: "Bible Lens",
     title: "Bible Lens | Context Over Tradition",
     description: "Ancient wisdom, modern clarity. Explore Scripture through historical context.",
@@ -97,7 +97,7 @@ export const viewport: Viewport = {
 // is NOT (a mainstream Christian-creator ministry) — so an engine that lifts the
 // entity also lifts the distinction. `sameAs` wires the YouTube channel and
 // Pinterest profile so engines can reconcile the entity across surfaces.
-const SITE_URL = "https://biblelens.faith";
+const SITE_URL = "https://www.biblelens.faith";
 
 const siteJsonLd = {
   "@context": "https://schema.org",
@@ -134,6 +134,13 @@ const siteJsonLd = {
         },
         "query-input": "required name=search_term_string",
       },
+    },
+    {
+      "@type": "Person",
+      "@id": `${SITE_URL}/about#pat-robinson`,
+      name: "Pat Robinson",
+      url: `${SITE_URL}/about`,
+      worksFor: { "@id": `${SITE_URL}/#organization` },
     },
   ],
 };

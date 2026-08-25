@@ -6,6 +6,7 @@ const navLinks = [
   { label: "Books", href: "/books" },
   { label: "Commentary", href: "/commentary" },
   { label: "Topics", href: "/topics" },
+  { label: "Timelines", href: "/timelines" },
   { label: "Start Here", href: "/start-here" },
   { label: "Ask a Scholar", href: "/chat" },
 ];
@@ -28,7 +29,7 @@ export function NavBar() {
         </Link>
 
         {/* Nav links centered beneath the crest */}
-        <ul className="hidden md:flex items-center justify-center gap-9 mt-1">
+        <ul className="hidden md:flex items-center justify-center gap-7 lg:gap-9 mt-1">
           {navLinks.map(({ label, href }) => (
             <li key={href}>
               <Link

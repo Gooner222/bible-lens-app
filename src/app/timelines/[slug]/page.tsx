@@ -4,11 +4,13 @@ import { notFound } from "next/navigation";
 import { EmailCapture } from "@/components/EmailCapture";
 import { GlassCard } from "@/components/GlassCard";
 import { ZoomableTimelineImage } from "@/components/ZoomableTimelineImage";
+import { ClaimStatusBadge } from "@/components/timelines/ClaimStatusBadge";
+import { TimelineVisual } from "@/components/timelines/TimelineVisual";
 import { getTimeline, TIMELINE_SLUGS, type Timeline } from "@/lib/timelines-data";
 
 export const dynamic = "force-static";
 
-const SITE_URL = "https://biblelens.faith";
+const SITE_URL = "https://www.biblelens.faith";
 
 interface TimelinePageProps {
   params: Promise<{ slug: string }>;
@@ -20,58 +22,59 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: TimelinePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const t = getTimeline(slug);
-  if (!t) return {};
-  const url = `${SITE_URL}/timelines/${t.slug}`;
-  const image = `${SITE_URL}${t.heroImage}`;
+  const timeline = getTimeline(slug);
+  if (!timeline) return {};
+  const url = `${SITE_URL}/timelines/${timeline.slug}`;
+  const image = `${SITE_URL}${timeline.socialImage}`;
+
   return {
-    title: t.metaTitle,
-    description: t.metaDescription,
+    title: timeline.metaTitle,
+    description: timeline.metaDescription,
+    authors: [{ name: "Pat Robinson", url: `${SITE_URL}/about` }],
     alternates: { canonical: url },
     openGraph: {
-      title: t.metaTitle,
-      description: t.metaDescription,
+      title: timeline.metaTitle,
+      description: timeline.metaDescription,
       url,
       siteName: "Bible Lens",
       type: "article",
-      images: [{ url: image, width: t.heroWidth, height: t.heroHeight, alt: t.heroAlt }],
+      publishedTime: timeline.datePublished,
+      modifiedTime: timeline.dateModified,
+      authors: [`${SITE_URL}/about`],
+      images: [{ url: image, width: 1200, height: 630, alt: timeline.posterAlt }],
     },
-    twitter: {
-      card: "summary_large_image",
-      title: t.metaTitle,
-      description: t.metaDescription,
-      images: [image],
-    },
+    twitter: { card: "summary_large_image", title: timeline.metaTitle, description: timeline.metaDescription, images: [image] },
   };
 }
 
-function jsonLd(t: Timeline) {
-  const url = `${SITE_URL}/timelines/${t.slug}`;
-  const image = `${SITE_URL}${t.heroImage}`;
+function jsonLd(timeline: Timeline) {
+  const url = `${SITE_URL}/timelines/${timeline.slug}`;
+  const image = `${SITE_URL}${timeline.socialImage}`;
+
   return {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
         "@id": `${url}#article`,
-        headline: t.title,
-        description: t.metaDescription,
-        image,
-        datePublished: t.datePublished,
-        dateModified: t.dateModified,
-        inLanguage: "en",
+        headline: timeline.title,
+        description: timeline.metaDescription,
+        image: { "@id": `${url}#primaryimage` },
+        datePublished: timeline.datePublished,
+        dateModified: timeline.dateModified,
+        inLanguage: "en-GB",
         isPartOf: { "@id": `${SITE_URL}/#website` },
         publisher: { "@id": `${SITE_URL}/#organization` },
-        author: { "@id": `${SITE_URL}/#organization` },
+        author: { "@type": "Person", "@id": `${SITE_URL}/about#pat-robinson`, name: "Pat Robinson", url: `${SITE_URL}/about` },
         mainEntityOfPage: url,
       },
       {
         "@type": "ImageObject",
         "@id": `${url}#primaryimage`,
         contentUrl: image,
-        width: t.heroWidth,
-        height: t.heroHeight,
-        caption: t.heroAlt,
+        width: 1200,
+        height: 630,
+        caption: timeline.posterAlt,
       },
     ],
   };
@@ -79,147 +82,118 @@ function jsonLd(t: Timeline) {
 
 export default async function TimelinePage({ params }: TimelinePageProps) {
   const { slug } = await params;
-  const t = getTimeline(slug);
-  if (!t) notFound();
+  const timeline = getTimeline(slug);
+  if (!timeline) notFound();
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: "var(--color-obsidian)" }}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(t)) }}
-      />
-      <main id="main-content" className="flex-1 w-full pt-[248px]">
-        {/* Editorial hero */}
-        <section
-          className="grain-overlay min-h-[36vh] flex items-end pb-14 px-6"
-          style={{ background: "var(--color-obsidian)" }}
-        >
-          <div className="max-w-6xl mx-auto w-full">
-            <GlassCard className="p-10 md:p-16 text-center max-w-4xl mx-auto">
-              <span className="micro-label mb-4 block" style={{ color: "var(--color-cyan-400)" }}>
-                {t.kicker}
-              </span>
-              <h1
-                className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-balance"
-                style={{ fontFamily: "var(--font-display)", color: "var(--color-text-primary)" }}
-              >
-                {t.title}
-              </h1>
-              <p
-                className="mt-3 max-w-2xl mx-auto text-lg text-pretty"
-                style={{ color: "var(--color-text-muted-warm)" }}
-              >
-                {t.tagline}
-              </p>
-            </GlassCard>
+    <div className="min-h-screen bg-[#050508] text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(timeline)) }} />
+      <main id="main-content" className="w-full pt-[248px]">
+        <section className="grain-overlay px-6 pb-14 pt-10">
+          <div className="mx-auto max-w-5xl">
+            <Link href="/timelines" className="micro-label inline-flex min-h-11 items-center text-cyan-300 hover:text-cyan-100">← Bible timelines</Link>
+            <p className="micro-label mt-7 text-cyan-300">{timeline.kicker}</p>
+            <h1 className="mt-4 max-w-4xl text-5xl font-semibold leading-[1.02] text-balance sm:text-6xl lg:text-7xl" style={{ fontFamily: "var(--font-display)" }}>
+              {timeline.title}
+            </h1>
+            <p className="mt-6 max-w-3xl text-xl leading-relaxed text-white/65">{timeline.tagline}</p>
+            <p className="mt-6 text-sm text-white/45">
+              Research and commentary by <Link href="/about" className="text-white/75 underline decoration-cyan-300/45 underline-offset-4 hover:text-cyan-200">Pat Robinson</Link>
+              <span aria-hidden="true"> · </span>Updated 25 August 2026
+            </p>
           </div>
         </section>
 
-        {/* Hero infographic + intro (the topic's headline argument) */}
-        <section id={t.introId} className="max-w-6xl mx-auto px-6 py-12 scroll-mt-[248px]">
-          {/* Click/tap opens a full-screen lightbox so the baked-in fine print is
-              legible. The readable content is also in the text below. */}
-          <figure className="mx-auto max-w-[640px]">
-            <ZoomableTimelineImage
-              src={t.heroImage}
-              alt={t.heroAlt}
-              width={t.heroWidth}
-              height={t.heroHeight}
-              priority
-              className="w-full h-auto"
-            />
-          </figure>
-          <div className="max-w-2xl mx-auto mt-10 space-y-4">
-            {t.intro.map((p, i) => (
-              <p key={i} className="text-lg leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                {p}
-              </p>
-            ))}
-            {t.introCite && (
-              <p className="micro-label pt-2" style={{ color: "var(--color-cyan-400)" }}>
-                {t.introCite}
-              </p>
-            )}
-          </div>
-          <div className="text-center mt-10">
-            <a
-              href={t.heroImage}
-              download={t.heroDownload}
-              className="inline-block px-6 py-3 font-semibold transition-all hover:brightness-110"
-              style={{ background: "var(--color-cyan-400)", color: "var(--color-bg-primary)", borderRadius: 0 }}
-            >
-              Download the full infographic (1000×1500 PNG)
-            </a>
-          </div>
+        <section className="mx-auto max-w-5xl px-6 py-10">
+          <TimelineVisual visual={timeline.visual} />
         </section>
 
-        {/* Anchored facet sections (e.g. the four Israel-in-Egypt arguments) */}
-        {t.sections.map((s) => (
-          <section
-            key={s.id}
-            id={s.id}
-            className="max-w-6xl mx-auto px-6 py-10 scroll-mt-[248px]"
-          >
-            <div className="max-w-4xl mx-auto grid md:grid-cols-[minmax(0,1fr)_320px] gap-10 items-start">
-              <div className="space-y-4 order-2 md:order-1">
-                <h2
-                  className="text-2xl sm:text-3xl font-semibold text-balance"
-                  style={{ fontFamily: "var(--font-display)", color: "var(--color-text-primary)" }}
-                >
-                  {s.heading}
-                </h2>
-                {s.body.map((p, i) => (
-                  <p key={i} className="text-lg leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                    {p}
-                  </p>
-                ))}
-                {s.cite && (
-                  <p className="micro-label pt-1" style={{ color: "var(--color-cyan-400)" }}>
-                    {s.cite}
-                  </p>
-                )}
+        <section className="mx-auto grid max-w-5xl gap-10 px-6 py-10 lg:grid-cols-[minmax(0,1fr)_280px]">
+          <div className="space-y-5">
+            {timeline.intro.map((paragraph) => <p key={paragraph} className="text-lg leading-8 text-white/72">{paragraph}</p>)}
+          </div>
+          <aside className="rounded-2xl border border-cyan-300/20 bg-cyan-300/[0.05] p-6">
+            <p className="micro-label text-cyan-300">BIBLE LENS CONCLUSION</p>
+            <p className="mt-4 text-sm leading-7 text-white/70">{timeline.conclusion}</p>
+          </aside>
+        </section>
+
+        <div className="mx-auto max-w-5xl px-6">
+          {timeline.sections.map((section, index) => (
+            <section key={section.id} id={section.id} className="scroll-mt-[248px] border-t border-white/10 py-12">
+              <div className="grid gap-6 md:grid-cols-[60px_minmax(0,1fr)]">
+                <span className="text-4xl font-semibold text-white/12" style={{ fontFamily: "var(--font-display)" }}>{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <h2 className="text-3xl font-semibold text-balance" style={{ fontFamily: "var(--font-display)" }}>{section.heading}</h2>
+                    {section.status && <ClaimStatusBadge status={section.status} />}
+                  </div>
+                  <div className="mt-5 max-w-3xl space-y-4">
+                    {section.body.map((paragraph) => <p key={paragraph} className="text-lg leading-8 text-white/68">{paragraph}</p>)}
+                    {section.cite && <p className="pt-2 text-xs font-semibold uppercase tracking-[0.16em] text-cyan-300">{section.cite}</p>}
+                  </div>
+                </div>
               </div>
-              {s.image && (
-                <figure className="order-1 md:order-2">
-                  <ZoomableTimelineImage
-                    src={s.image}
-                    alt={s.imageAlt ?? ""}
-                    width={1000}
-                    height={1500}
-                    className="w-full h-auto"
-                    sizes="(max-width: 768px) 100vw, 320px"
-                  />
-                </figure>
-              )}
+            </section>
+          ))}
+        </div>
+
+        <section className="border-y border-white/8 bg-[#09090f] px-6 py-16" aria-labelledby="evidence-ledger-heading">
+          <div className="mx-auto max-w-5xl">
+            <div className="max-w-3xl">
+              <p className="micro-label text-cyan-300">SOURCE CHECK</p>
+              <h2 id="evidence-ledger-heading" className="mt-3 text-4xl font-semibold" style={{ fontFamily: "var(--font-display)" }}>Evidence ledger</h2>
+              <p className="mt-4 text-lg leading-relaxed text-white/55">This is the line between what the sources say and what the reconstruction proposes.</p>
             </div>
-          </section>
-        ))}
-
-        {/* Sources */}
-        <p className="text-xs text-center mt-6 mb-12 px-6 max-w-2xl mx-auto" style={{ color: "var(--color-text-muted)" }}>
-          {t.sources}
-        </p>
-
-        {/* Email capture */}
-        <section className="max-w-6xl mx-auto px-6 pb-12">
-          <GlassCard className="p-10">
-            <EmailCapture
-              headline="Want the next timeline in your inbox?"
-              subtext="We'll send a note when a new infographic ships — no weekly newsletter, no upsell, just the next one."
-            />
-          </GlassCard>
+            <div className="mt-10 grid gap-5 sm:grid-cols-2">
+              {timeline.evidence.map((item) => (
+                <article key={item.title} className="rounded-2xl border border-white/10 bg-white/[0.025] p-6">
+                  <ClaimStatusBadge status={item.status} />
+                  <h3 className="mt-4 text-xl font-semibold" style={{ fontFamily: "var(--font-display)" }}>{item.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-white/60">{item.summary}</p>
+                  <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/35">
+                    Sources {item.sourceIds.map((id) => `[${timeline.sources.findIndex((source) => source.id === id) + 1}]`).join(" ")}
+                  </p>
+                </article>
+              ))}
+            </div>
+            <aside className="mt-8 rounded-2xl border border-orange-300/20 bg-orange-300/[0.045] p-7">
+              <div className="flex flex-wrap items-center gap-3"><ClaimStatusBadge status="disputed" /><h3 className="text-lg font-semibold">The strongest objection</h3></div>
+              <p className="mt-4 max-w-4xl leading-7 text-white/65">{timeline.strongestObjection}</p>
+            </aside>
+          </div>
         </section>
 
-        {/* Back to index */}
-        <div className="text-center pb-16">
-          <Link
-            href="/timelines"
-            className="micro-label transition-colors hover:brightness-125"
-            style={{ color: "var(--color-cyan-400)" }}
-          >
-            ← All timelines
-          </Link>
-        </div>
+        <section className="mx-auto max-w-5xl px-6 py-16" aria-labelledby="sources-heading">
+          <h2 id="sources-heading" className="text-3xl font-semibold" style={{ fontFamily: "var(--font-display)" }}>Sources and further reading</h2>
+          <ol className="mt-8 space-y-5">
+            {timeline.sources.map((source, index) => (
+              <li key={source.id} className="grid gap-2 border-t border-white/8 pt-5 sm:grid-cols-[34px_minmax(0,1fr)]">
+                <span className="text-sm font-semibold text-cyan-300">[{index + 1}]</span>
+                <div>
+                  <p className="font-semibold text-white">{source.url ? <a href={source.url} target="_blank" rel="noreferrer" className="underline decoration-white/20 underline-offset-4 hover:text-cyan-200">{source.title}</a> : source.title}{source.author ? ` — ${source.author}` : ""}</p>
+                  <p className="mt-1 text-sm leading-6 text-white/50">{source.note}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className="mx-auto grid max-w-5xl gap-10 border-t border-white/8 px-6 py-16 lg:grid-cols-[320px_minmax(0,1fr)]">
+          <figure>
+            <ZoomableTimelineImage src={timeline.posterImage} alt={timeline.posterAlt} width={timeline.posterWidth} height={timeline.posterHeight} className="h-auto w-full" sizes="(max-width: 1024px) 100vw, 320px" />
+          </figure>
+          <div className="self-center">
+            <p className="micro-label text-amber-300">TAKE IT WITH YOU</p>
+            <h2 className="mt-3 text-3xl font-semibold" style={{ fontFamily: "var(--font-display)" }}>The shareable evidence card</h2>
+            <p className="mt-4 max-w-xl leading-7 text-white/60">A portrait summary for saving or sharing. The live page remains the source of record, where qualifications and references stay attached.</p>
+            <a href={timeline.posterImage} download={timeline.posterDownload} className="mt-7 inline-flex min-h-12 items-center bg-cyan-300 px-6 font-semibold text-[#050508] transition-colors hover:bg-cyan-200">Download PNG</a>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-5xl px-6 pb-16">
+          <GlassCard className="p-8 sm:p-10"><EmailCapture headline="Follow the evidence" subtext="New timeline investigations arrive when the source trail is ready." /></GlassCard>
+        </section>
       </main>
     </div>
   );

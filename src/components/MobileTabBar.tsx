@@ -6,7 +6,8 @@ import { cn } from "@/lib/utils";
 
 const tabItems = [
   { label: "Books", href: "/books", icon: "menu_book", ariaLabel: "Books" },
-  { label: "Commentary", href: "/commentary", icon: "layers", ariaLabel: "Commentary" },
+  { label: "Notes", href: "/commentary", icon: "layers", ariaLabel: "Commentary" },
+  { label: "Timelines", href: "/timelines", icon: "timeline", ariaLabel: "Bible timelines" },
   { label: "Start Here", href: "/start-here", icon: "bookmark", ariaLabel: "Start here — reading paths" },
   { label: "Scholar", href: "/chat", icon: "robot_2", ariaLabel: "Ask a Scholar — AI chat" },
 ];
@@ -17,6 +18,9 @@ function isActive(href: string, pathname: string): boolean {
   }
   if (href === "/commentary") {
     return pathname.startsWith("/commentary") || pathname.startsWith("/topics");
+  }
+  if (href === "/timelines") {
+    return pathname.startsWith("/timelines");
   }
   if (href === "/start-here") {
     return pathname === "/start-here" || pathname.startsWith("/start-here/");
@@ -62,7 +66,7 @@ export function MobileTabBar() {
               <span className="material-symbols-outlined" style={{ fontSize: "24px" }}>
                 {item.icon}
               </span>
-              <span className="micro-label">{item.label}</span>
+              <span className="text-[8px] font-semibold uppercase tracking-[0.08em]">{item.label}</span>
             </Link>
           </li>
         ))}
