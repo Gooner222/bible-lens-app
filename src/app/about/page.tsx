@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/page-metadata";
 export const metadata: Metadata = pageMetadata({
   title: "About the Lens | Bible Lens",
   description:
-    "Bible Lens reads Scripture through a unitarian, partial-preterist, historical-critical lens. Learn what that means and why it shapes every answer you get.",
+    "Bible Lens reads Scripture through a Unitarian, Partial Preterist, Historic Premillennial, historical-critical lens. Learn what that means and why it shapes every answer you get.",
   path: "/about",
 });
 
@@ -126,8 +126,8 @@ export default function AboutPage() {
                 the end of the Old Covenant era — not the end of the physical world.
               </p>
               <p>
-                This view is called partial preterism. It doesn&rsquo;t deny a future return of
-                Christ, but it takes seriously the plain time-language of the New Testament:
+                This view is called partial preterism. It holds a future return of Christ while
+                taking seriously the plain time-language of the New Testament:
                 &ldquo;soon,&rdquo; &ldquo;near,&rdquo; and &ldquo;quickly&rdquo; meant what
                 they say.
               </p>
@@ -135,6 +135,37 @@ export default function AboutPage() {
                 This is another minority view, held by a significant number of scholars and
                 theologians across history. We present it as historically-grounded, not as the
                 only valid reading.
+              </p>
+            </div>
+          </div>
+
+          {/* Historic Premillennialism */}
+          <div className="mb-10 pl-5 border-l-2" style={{ borderColor: "var(--color-gold-400)" }}>
+            <h3
+              className="text-xl font-semibold mb-3"
+              style={{ fontFamily: "var(--font-cinzel), serif", color: "var(--color-text-primary)" }}
+            >
+              Historic Premillennialism
+            </h3>
+            <div className="space-y-4 text-lg" style={{ color: "var(--color-text-secondary)" }}>
+              <p>
+                First-century fulfilment is not the end of the story. Bible Lens holds that Jesus
+                will return once, visibly and bodily, before the future literal millennial reign
+                described in Revelation 20.
+              </p>
+              <p>
+                That means no separate secret rapture followed years later by another return. The
+                gathering of believers belongs to the same public coming of Christ.
+              </p>
+              <p>
+                This is Historic Premillennialism, not Postmillennialism and not the modern
+                Dispensational system. The kingdom is already inaugurated, but its consummation
+                arrives through Christ&rsquo;s return rather than the gradual Christianisation of
+                history.
+              </p>
+              <p className="text-lg italic" style={{ color: "var(--color-text-muted)" }}>
+                Other Christian traditions arrange these events differently. We present those
+                readings fairly while stating this one as Bible Lens&rsquo;s committed position.
               </p>
             </div>
           </div>
@@ -184,7 +215,9 @@ export default function AboutPage() {
               of Genesis will emphasize ancient cosmological context over modern scientific
               debates. Our reading of Matthew 24 will highlight the 70 AD fulfillment. When the
               identity of Jesus comes up, the AI will present a unitarian perspective grounded in
-              the historical text.
+              the historical text. And when prophecy reaches beyond that first-century horizon,
+              it will retain the future visible return and literal millennial reign rather than
+              quietly importing Full Preterist or Postmillennial conclusions.
             </p>
             <p>
               Our goal is not to tell you what to believe. It&rsquo;s to give you a coherent,
